@@ -1,0 +1,55 @@
+# Git Aliases
+
+[alias]
+    # List all aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    # Reset
+    rs = reset --soft origin/master
+    rh = reset --hard origin/master
+
+    # List uncommitted changes in a compact format.
+    st = status -s
+
+    # Display a more concise and readable log of commits.
+    lg = log --oneline --abbrev-commit --graph --decorate
+
+    # Add all tracked files and commit with a message
+    add-commit = "!f() { git add . && git commit -m \"$1\"; }; f"
+
+    # List All local Branches
+    branch-list = branch --list
+
+    # List local branches that no longer have a corresponding remote branch
+    branch-local-list = "!f() { git fetch -p && git branch -vv | awk '/: gone]/{print $1}'; }; f"
+
+    # Clean up local branches that no longer have a corresponding remote branch
+    branch-local-delete = "!f() { git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+
+    # Clean up all local branches
+    branch-all-delete = "!f() { git branch | grep -v 'master' | grep -v 'main' | xargs git branch -D; }; f"
+
+    # Update 'master' to the current state
+    fetch-master = "!git fetch origin master:master -u"
+
+    # Create a new branch from 'master'
+    checkout-branch = "!f() { git fetch-master && git checkout master && git checkout -b $1; }; f"
+
+    # Assume aliases for ignoring changes in files
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+
+    # Show files that are assumed (ignored)
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+
+    # Unassume all the assumed (ignored) files
+    unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+
+    # Assume all modified files
+    assumeall = "!git status -s | awk '{print $2}' | xargs git assume"
+
+    # Rebase the current branch onto 'master'
+    rebase-current = "!f() { git fetch origin master:master && git pull origin master && git rebase master; }; f"
+
+    # Create a draft pull request
+    pr = "!gh pr create --base master --draft --fill"
