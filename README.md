@@ -54,7 +54,8 @@ Welcome to the repository where I share the Git aliases I find useful in my dail
 - `branch-list`: List all local branches.
 - `branch-local-list`: List Local Branches Not in Remote
 - `branch-local-delete`: Delete Local Branches Not in Remote
-- `fetch-master`: Update the Local master Branch
+- `fetch-master`: Fetch the Local master Branch With The Remote
+- `update-master`: Update the Local master Branch
 - `checkout-branch`: Create a New Branch from master
 - `assume`: Ignore Changes in a File (Assume Unchanged)
 - `unassume`: Stop Ignoring Changes in a File

@@ -29,11 +29,14 @@
     # Clean up all local branches
     branch-all-delete = "!f() { git branch | grep -v 'master' | grep -v 'main' | xargs git branch -D; }; f"
 
+    # fetch 'master' to the current state
+    fetch-master = "!git fetch origin master:master"
+
     # Update 'master' to the current state
-    fetch-master = "!git fetch origin master:master -u"
+    update-master = "!f() { git checkout master && git pull && git checkout -; }"
 
     # Create a new branch from 'master'
-    checkout-branch = "!f() { git fetch-master && git checkout master && git checkout -b $1; }; f"
+    checkout-branch = "!f() { git checkout master && git pull && git checkout -b $1; }; f"
 
     # Assume aliases for ignoring changes in files
     assume = update-index --assume-unchanged
